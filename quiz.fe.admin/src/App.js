@@ -1,40 +1,30 @@
-import React from 'react';
-
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { getCurrentUser } from './store/auth/actions';
+import { useHistory } from 'react-router-dom';
 //import Scss
 import './assets/scss/themes.scss';
 
 //imoprt Route
 import Route from './Routes';
 
-// Import Firebase Configuration file
-// import { initFirebaseBackend } from "./helpers/firebase_helper";
-
-// Fake Backend 
-import fakeBackend from "./helpers/AuthType/fakeBackend";
-
-// Activating fake backend
-fakeBackend();
-
-// const firebaseConfig = {
-//   apiKey: process.env.REACT_APP_API_KEY,
-//   authDomain: process.env.REACT_APP_AUTHDOMAIN,
-//   databaseURL: process.env.REACT_APP_DATABASEURL,
-//   projectId: process.env.REACT_APP_PROJECTID,
-//   storageBucket: process.env.REACT_APP_STORAGEBUCKET,
-//   messagingSenderId: process.env.REACT_APP_MESSAGINGSENDERID,
-//   appId: process.env.REACT_APP_APPID,
-//   measurementId: process.env.REACT_APP_MEASUREMENTID,
-// };
-
-// init firebase backend
-// initFirebaseBackend(firebaseConfig);
-
 function App() {
-  return (
-    <React.Fragment>
-      <Route />
-    </React.Fragment>
-  );
+    const dispatch = useDispatch();
+    const history = useHistory();
+
+    const { token } = useSelector((state) => ({
+        token: state.Auth.token,
+    }));
+    useEffect(() => {
+        console.log(token);
+        if (token) dispatch(getCurrentUser(history));
+    }, [token]);
+
+    return (
+        <React.Fragment>
+            <Route />
+        </React.Fragment>
+    );
 }
 
 export default App;

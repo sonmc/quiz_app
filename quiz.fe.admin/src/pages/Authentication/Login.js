@@ -1,27 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import MetaTags from 'react-meta-tags';
 import { Card, CardBody, Col, Container, Input, Label, Row, Button, Form, FormFeedback } from 'reactstrap';
-import ParticlesAuth from "../AuthenticationInner/ParticlesAuth";
+import ParticlesAuth from './ParticlesAuth';
 
 //redux
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from 'react-redux';
 
-import { withRouter, Link } from "react-router-dom";
+import { withRouter, Link } from 'react-router-dom';
 
 // Formik validation
-import * as Yup from "yup";
-import { useFormik } from "formik";
+import * as Yup from 'yup';
+import { useFormik } from 'formik';
 
 //Social Media Imports
-import { GoogleLogin } from "react-google-login";
+import { GoogleLogin } from 'react-google-login';
 // import TwitterLogin from "react-twitter-auth"
-import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 // actions
-import { loginUser, socialLogin } from "../../store/actions";
+import { loginUser, socialLogin } from '../../store/actions';
 
-import logoLight from "../../assets/images/logo-light.png";
+import logoLight from '../../assets/images/logo-light.png';
 //Import config
-import { facebook, google } from "../../config";
+import { facebook, google } from '../../config';
 //import images
 
 const Login = (props) => {
@@ -32,24 +32,21 @@ const Login = (props) => {
         enableReinitialize: true,
 
         initialValues: {
-            email: "admin@themesbrand.com" || '',
-            password: "123456" || '',
+            email: 'gvthanh@gmail.com' || '',
+            password: 'ke@2023' || '',
+            domain: 'LMS',
         },
         validationSchema: Yup.object({
-            email: Yup.string().required("Please Enter Your Email"),
-            password: Yup.string().required("Please Enter Your Password"),
+            email: Yup.string().required('Please Enter Your Email'),
+            password: Yup.string().required('Please Enter Your Password'),
         }),
         onSubmit: (values) => {
-            dispatch(loginUser(values, props.history));
-        }
+            dispatch(loginUser(values));
+        },
     });
 
-    const { error } = useSelector(state => ({
-        error: state.Login.error,
-    }));
-
     const signIn = (res, type) => {
-        if (type === "google" && res) {
+        if (type === 'google' && res) {
             const postData = {
                 name: res.profileObj.name,
                 email: res.profileObj.email,
@@ -57,7 +54,7 @@ const Login = (props) => {
                 idToken: res.tokenId,
             };
             dispatch(socialLogin(postData, props.history, type));
-        } else if (type === "facebook" && res) {
+        } else if (type === 'facebook' && res) {
             const postData = {
                 name: res.name,
                 email: res.email,
@@ -69,22 +66,21 @@ const Login = (props) => {
     };
 
     //handleGoogleLoginResponse
-    const googleResponse = response => {
-        signIn(response, "google");
+    const googleResponse = (response) => {
+        signIn(response, 'google');
     };
 
     //handleTwitterLoginResponse
     // const twitterResponse = e => {}
 
     //handleFacebookLoginResponse
-    const facebookResponse = response => {
-        signIn(response, "facebook");
+    const facebookResponse = (response) => {
+        signIn(response, 'facebook');
     };
     return (
         <React.Fragment>
             <ParticlesAuth>
                 <div className="auth-page-content">
-
                     <MetaTags>
                         <title>Basic SignIn | Velzon - React Admin & Dashboard Template</title>
                     </MetaTags>
@@ -117,10 +113,12 @@ const Login = (props) => {
                                                     validation.handleSubmit();
                                                     return false;
                                                 }}
-                                                action="#">
-
+                                                action="#"
+                                            >
                                                 <div className="mb-3">
-                                                    <Label htmlFor="email" className="form-label">Email</Label>
+                                                    <Label htmlFor="email" className="form-label">
+                                                        Email
+                                                    </Label>
                                                     <Input
                                                         name="email"
                                                         className="form-control"
@@ -128,10 +126,8 @@ const Login = (props) => {
                                                         type="email"
                                                         onChange={validation.handleChange}
                                                         onBlur={validation.handleBlur}
-                                                        value={validation.values.email || ""}
-                                                        invalid={
-                                                            validation.touched.email && validation.errors.email ? true : false
-                                                        }
+                                                        value={validation.values.email || ''}
+                                                        invalid={validation.touched.email && validation.errors.email ? true : false}
                                                     />
                                                     {validation.touched.email && validation.errors.email ? (
                                                         <FormFeedback type="invalid">{validation.errors.email}</FormFeedback>
@@ -140,36 +136,48 @@ const Login = (props) => {
 
                                                 <div className="mb-3">
                                                     <div className="float-end">
-                                                        <Link to="/forgot-password" className="text-muted">Forgot password?</Link>
+                                                        <Link to="/forgot-password" className="text-muted">
+                                                            Forgot password?
+                                                        </Link>
                                                     </div>
-                                                    <Label className="form-label" htmlFor="password-input">Password</Label>
+                                                    <Label className="form-label" htmlFor="password-input">
+                                                        Password
+                                                    </Label>
                                                     <div className="position-relative auth-pass-inputgroup mb-3">
                                                         <Input
                                                             name="password"
-                                                            value={validation.values.password || ""}
+                                                            value={validation.values.password || ''}
                                                             type="password"
                                                             className="form-control pe-5"
                                                             placeholder="Enter Password"
                                                             onChange={validation.handleChange}
                                                             onBlur={validation.handleBlur}
-                                                            invalid={
-                                                                validation.touched.password && validation.errors.password ? true : false
-                                                            }
+                                                            invalid={validation.touched.password && validation.errors.password ? true : false}
                                                         />
                                                         {validation.touched.password && validation.errors.password ? (
                                                             <FormFeedback type="invalid">{validation.errors.password}</FormFeedback>
                                                         ) : null}
-                                                        <button className="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted" type="button" id="password-addon"><i className="ri-eye-fill align-middle"></i></button>
+                                                        <button
+                                                            className="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted"
+                                                            type="button"
+                                                            id="password-addon"
+                                                        >
+                                                            <i className="ri-eye-fill align-middle"></i>
+                                                        </button>
                                                     </div>
                                                 </div>
 
                                                 <div className="form-check">
                                                     <Input className="form-check-input" type="checkbox" value="" id="auth-remember-check" />
-                                                    <Label className="form-check-label" htmlFor="auth-remember-check">Remember me</Label>
+                                                    <Label className="form-check-label" htmlFor="auth-remember-check">
+                                                        Remember me
+                                                    </Label>
                                                 </div>
 
                                                 <div className="mt-4">
-                                                    <Button color="success" className="btn btn-success w-100" type="submit">Sign In</Button>
+                                                    <Button color="success" className="btn btn-success w-100" type="submit">
+                                                        Sign In
+                                                    </Button>
                                                 </div>
 
                                                 <div className="mt-4 text-center">
@@ -181,35 +189,28 @@ const Login = (props) => {
                                                             appId={facebook.APP_ID}
                                                             autoLoad={false}
                                                             callback={facebookResponse}
-                                                            render={renderProps => (
-                                                                <Button color="primary"
-                                                                    className="btn-icon me-1"
-                                                                    onClick={renderProps.onClick}
-                                                                >
+                                                            render={(renderProps) => (
+                                                                <Button color="primary" className="btn-icon me-1" onClick={renderProps.onClick}>
                                                                     <i className="ri-facebook-fill fs-16" />
                                                                 </Button>
                                                             )}
                                                         />
                                                         <GoogleLogin
-                                                            clientId={
-                                                                google.CLIENT_ID ? google.CLIENT_ID : ""
-                                                            }
-                                                            render={renderProps => (
-                                                                <Button color="danger"
-                                                                    to="#"
-                                                                    className="btn-icon me-1"
-                                                                    onClick={renderProps.onClick}
-                                                                >
+                                                            clientId={google.CLIENT_ID ? google.CLIENT_ID : ''}
+                                                            render={(renderProps) => (
+                                                                <Button color="danger" to="#" className="btn-icon me-1" onClick={renderProps.onClick}>
                                                                     <i className="ri-google-fill fs-16" />
                                                                 </Button>
                                                             )}
                                                             onSuccess={googleResponse}
-                                                            onFailure={() => {
-
-                                                            }}
+                                                            onFailure={() => {}}
                                                         />
-                                                        <Button color="dark" className="btn-icon"><i className="ri-github-fill fs-16"></i></Button>{" "}
-                                                        <Button color="info" className="btn-icon"><i className="ri-twitter-fill fs-16"></i></Button>
+                                                        <Button color="dark" className="btn-icon">
+                                                            <i className="ri-github-fill fs-16"></i>
+                                                        </Button>{' '}
+                                                        <Button color="info" className="btn-icon">
+                                                            <i className="ri-twitter-fill fs-16"></i>
+                                                        </Button>
                                                     </div>
                                                 </div>
                                             </Form>
@@ -218,9 +219,14 @@ const Login = (props) => {
                                 </Card>
 
                                 <div className="mt-4 text-center">
-                                    <p className="mb-0">Don't have an account ? <Link to="/register" className="fw-semibold text-primary text-decoration-underline"> Signup </Link> </p>
+                                    <p className="mb-0">
+                                        Don't have an account ?{' '}
+                                        <Link to="/register" className="fw-semibold text-primary text-decoration-underline">
+                                            {' '}
+                                            Signup{' '}
+                                        </Link>{' '}
+                                    </p>
                                 </div>
-
                             </Col>
                         </Row>
                     </Container>

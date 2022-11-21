@@ -1,9 +1,5 @@
 import React, { useState } from 'react';
-import {
-    Offcanvas,
-    OffcanvasHeader,
-    OffcanvasBody,
-} from "reactstrap";
+import { Offcanvas, OffcanvasHeader, OffcanvasBody } from 'reactstrap';
 
 //redux
 import {
@@ -16,8 +12,8 @@ import {
     changeLeftsidebarSizeType,
     changeLeftsidebarViewType,
     // resetValue
-} from "../../store/actions";
-import { useSelector, useDispatch } from "react-redux";
+} from '../../store/actions';
+import { useSelector, useDispatch } from 'react-redux';
 
 //import Constant
 import {
@@ -29,10 +25,10 @@ import {
     topbarThemeTypes,
     leftsidbarSizeTypes,
     leftSidebarViewTypes,
-} from "../constants/layout";
+} from '../constants/layout';
 
 //SimpleBar
-import SimpleBar from "simplebar-react";
+import SimpleBar from 'simplebar-react';
 
 const RightSidebar = () => {
     const dispatch = useDispatch();
@@ -46,7 +42,7 @@ const RightSidebar = () => {
         leftsidbarSizeType,
         leftSidebarViewType,
         // resetValue
-    } = useSelector(state => ({
+    } = useSelector((state) => ({
         layoutType: state.Layout.layoutType,
         leftSidebarType: state.Layout.leftSidebarType,
         layoutModeType: state.Layout.layoutModeType,
@@ -59,7 +55,7 @@ const RightSidebar = () => {
     }));
 
     // open offcanvas
-    const [open, setOpen] = useState(true);
+    const [open, setOpen] = useState(false);
     const toggleLeftCanvas = () => {
         setOpen(!open);
     };
@@ -69,7 +65,7 @@ const RightSidebar = () => {
             <div>
                 <div className="customizer-setting d-none d-md-block">
                     <div onClick={toggleLeftCanvas} className="btn-info btn-rounded shadow-lg btn btn-icon btn-lg p-2">
-                        <i className='mdi mdi-spin mdi-cog-outline fs-22'></i>
+                        <i className="mdi mdi-spin mdi-cog-outline fs-22"></i>
                     </div>
                 </div>
                 <Offcanvas isOpen={open} toggle={toggleLeftCanvas} direction="end" className="offcanvas-end border-0">
@@ -91,7 +87,7 @@ const RightSidebar = () => {
                                                 type="radio"
                                                 value={layoutTypes.VERTICAL}
                                                 checked={layoutType === layoutTypes.VERTICAL}
-                                                onChange={e => {
+                                                onChange={(e) => {
                                                     if (e.target.checked) {
                                                         dispatch(changeLayout(e.target.value));
                                                     }
@@ -127,12 +123,13 @@ const RightSidebar = () => {
                                                 type="radio"
                                                 value={layoutTypes.HORIZONTAL}
                                                 checked={layoutType === layoutTypes.HORIZONTAL}
-                                                onChange={e => {
+                                                onChange={(e) => {
                                                     if (e.target.checked) {
                                                         dispatch(changeLayout(e.target.value));
                                                     }
                                                 }}
-                                                className="form-check-input" />
+                                                className="form-check-input"
+                                            />
                                             <label className="form-check-label p-0 avatar-md w-100" htmlFor="customizer-layout02">
                                                 <span className="d-flex h-100 flex-column gap-1">
                                                     <span className="bg-light d-flex p-1 gap-1 align-items-center">
@@ -155,12 +152,13 @@ const RightSidebar = () => {
                                                 type="radio"
                                                 value={layoutTypes.TWOCOLUMN}
                                                 checked={layoutType === layoutTypes.TWOCOLUMN}
-                                                onChange={e => {
+                                                onChange={(e) => {
                                                     if (e.target.checked) {
                                                         dispatch(changeLayout(e.target.value));
                                                     }
                                                 }}
-                                                className="form-check-input" />
+                                                className="form-check-input"
+                                            />
                                             <label className="form-check-label p-0 avatar-md w-100" htmlFor="customizer-layout03">
                                                 <span className="d-flex gap-1 h-100">
                                                     <span className="flex-shrink-0">
@@ -206,7 +204,7 @@ const RightSidebar = () => {
                                                     id="layout-mode-light"
                                                     value={layoutModeTypes.LIGHTMODE}
                                                     checked={layoutModeType === layoutModeTypes.LIGHTMODE}
-                                                    onChange={e => {
+                                                    onChange={(e) => {
                                                         if (e.target.checked) {
                                                             dispatch(changeLayoutMode(e.target.value));
                                                         }
@@ -243,7 +241,7 @@ const RightSidebar = () => {
                                                     id="layout-mode-dark"
                                                     value={layoutModeTypes.DARKMODE}
                                                     checked={layoutModeType === layoutModeTypes.DARKMODE}
-                                                    onChange={e => {
+                                                    onChange={(e) => {
                                                         if (e.target.checked) {
                                                             dispatch(changeLayoutMode(e.target.value));
                                                         }
@@ -288,10 +286,10 @@ const RightSidebar = () => {
                                                             id="layout-width-fluid"
                                                             value={layoutWidthTypes.FLUID}
                                                             checked={layoutWidthType === layoutWidthTypes.FLUID}
-                                                            onChange={e => {
+                                                            onChange={(e) => {
                                                                 if (e.target.checked) {
                                                                     dispatch(changeLayoutWidth(e.target.value));
-                                                                    dispatch(changeLeftsidebarSizeType("lg"));
+                                                                    dispatch(changeLeftsidebarSizeType('lg'));
                                                                 }
                                                             }}
                                                         />
@@ -325,10 +323,10 @@ const RightSidebar = () => {
                                                             id="layout-width-boxed"
                                                             value={layoutWidthTypes.BOXED}
                                                             checked={layoutWidthType === layoutWidthTypes.BOXED}
-                                                            onChange={e => {
+                                                            onChange={(e) => {
                                                                 if (e.target.checked) {
                                                                     dispatch(changeLayoutWidth(e.target.value));
-                                                                    dispatch(changeLeftsidebarSizeType("sm-hover"));
+                                                                    dispatch(changeLeftsidebarSizeType('sm-hover'));
                                                                 }
                                                             }}
                                                         />
@@ -368,13 +366,15 @@ const RightSidebar = () => {
                                                     id="layout-position-fixed"
                                                     value={layoutPositionTypes.FIXED}
                                                     checked={layoutPositionType === layoutPositionTypes.FIXED}
-                                                    onChange={e => {
+                                                    onChange={(e) => {
                                                         if (e.target.checked) {
                                                             dispatch(changeLayoutPosition(e.target.value));
                                                         }
                                                     }}
                                                 />
-                                                <label className="btn btn-light w-sm" htmlFor="layout-position-fixed">Fixed</label>
+                                                <label className="btn btn-light w-sm" htmlFor="layout-position-fixed">
+                                                    Fixed
+                                                </label>
 
                                                 <input
                                                     type="radio"
@@ -383,13 +383,15 @@ const RightSidebar = () => {
                                                     id="layout-position-scrollable"
                                                     value={layoutPositionTypes.SCROLLABLE}
                                                     checked={layoutPositionType === layoutPositionTypes.SCROLLABLE}
-                                                    onChange={e => {
+                                                    onChange={(e) => {
                                                         if (e.target.checked) {
                                                             dispatch(changeLayoutPosition(e.target.value));
                                                         }
                                                     }}
                                                 />
-                                                <label className="btn btn-light w-sm ms-0" htmlFor="layout-position-scrollable">Scrollable</label>
+                                                <label className="btn btn-light w-sm ms-0" htmlFor="layout-position-scrollable">
+                                                    Scrollable
+                                                </label>
                                             </div>
                                         </div>
                                     </React.Fragment>
@@ -408,7 +410,7 @@ const RightSidebar = () => {
                                                 id="topbar-color-light"
                                                 value={topbarThemeTypes.LIGHT}
                                                 checked={topbarThemeType === topbarThemeTypes.LIGHT}
-                                                onChange={e => {
+                                                onChange={(e) => {
                                                     if (e.target.checked) {
                                                         dispatch(changeTopbarTheme(e.target.value));
                                                     }
@@ -444,7 +446,7 @@ const RightSidebar = () => {
                                                 id="topbar-color-dark"
                                                 value={topbarThemeTypes.DARK}
                                                 checked={topbarThemeType === topbarThemeTypes.DARK}
-                                                onChange={e => {
+                                                onChange={(e) => {
                                                     if (e.target.checked) {
                                                         dispatch(changeTopbarTheme(e.target.value));
                                                     }
@@ -473,9 +475,8 @@ const RightSidebar = () => {
                                     </div>
                                 </div>
 
-                                {layoutType === "vertical" && (
+                                {layoutType === 'vertical' && (
                                     <React.Fragment>
-
                                         <div id="sidebar-size">
                                             <h6 className="mt-4 mb-0 fw-semibold text-uppercase">Sidebar Size</h6>
                                             <p className="text-muted">Choose a size of Sidebar.</p>
@@ -490,7 +491,7 @@ const RightSidebar = () => {
                                                             id="sidebar-size-default"
                                                             value={leftsidbarSizeTypes.DEFAULT}
                                                             checked={leftsidbarSizeType === leftsidbarSizeTypes.DEFAULT}
-                                                            onChange={e => {
+                                                            onChange={(e) => {
                                                                 if (e.target.checked) {
                                                                     dispatch(changeLeftsidebarSizeType(e.target.value));
                                                                 }
@@ -527,7 +528,7 @@ const RightSidebar = () => {
                                                             id="sidebar-size-compact"
                                                             value={leftsidbarSizeTypes.COMPACT}
                                                             checked={leftsidbarSizeType === leftsidbarSizeTypes.COMPACT}
-                                                            onChange={e => {
+                                                            onChange={(e) => {
                                                                 if (e.target.checked) {
                                                                     dispatch(changeLeftsidebarSizeType(e.target.value));
                                                                 }
@@ -564,7 +565,7 @@ const RightSidebar = () => {
                                                             id="sidebar-size-small"
                                                             value={leftsidbarSizeTypes.SMALLICON}
                                                             checked={leftsidbarSizeType === leftsidbarSizeTypes.SMALLICON}
-                                                            onChange={e => {
+                                                            onChange={(e) => {
                                                                 if (e.target.checked) {
                                                                     dispatch(changeLeftsidebarSizeType(e.target.value));
                                                                 }
@@ -601,12 +602,11 @@ const RightSidebar = () => {
                                                             id="sidebar-size-small-hover"
                                                             value={leftsidbarSizeTypes.SMALLHOVER}
                                                             checked={leftsidbarSizeType === leftsidbarSizeTypes.SMALLHOVER}
-                                                            onChange={e => {
+                                                            onChange={(e) => {
                                                                 if (e.target.checked) {
                                                                     dispatch(changeLeftsidebarSizeType(e.target.value));
                                                                 }
                                                             }}
-
                                                         />
                                                         <label className="form-check-label p-0 avatar-md w-100" htmlFor="sidebar-size-small-hover">
                                                             <span className="d-flex gap-1 h-100">
@@ -646,12 +646,11 @@ const RightSidebar = () => {
                                                             id="sidebar-view-default"
                                                             value={leftSidebarViewTypes.DEFAULT}
                                                             checked={leftSidebarViewType === leftSidebarViewTypes.DEFAULT}
-                                                            onChange={e => {
+                                                            onChange={(e) => {
                                                                 if (e.target.checked) {
                                                                     dispatch(changeLeftsidebarViewType(e.target.value));
                                                                 }
                                                             }}
-
                                                         />
                                                         <label className="form-check-label p-0 avatar-md w-100" htmlFor="sidebar-view-default">
                                                             <span className="d-flex gap-1 h-100">
@@ -683,7 +682,7 @@ const RightSidebar = () => {
                                                             id="sidebar-view-detached"
                                                             value={leftSidebarViewTypes.DETACHED}
                                                             checked={leftSidebarViewType === leftSidebarViewTypes.DETACHED}
-                                                            onChange={e => {
+                                                            onChange={(e) => {
                                                                 if (e.target.checked) {
                                                                     dispatch(changeLeftsidebarViewType(e.target.value));
                                                                 }
@@ -716,7 +715,7 @@ const RightSidebar = () => {
                                     </React.Fragment>
                                 )}
 
-                                {layoutType !== "horizontal" && (
+                                {layoutType !== 'horizontal' && (
                                     <div id="sidebar-color">
                                         <h6 className="mt-4 mb-0 fw-semibold text-uppercase">Sidebar Color</h6>
                                         <p className="text-muted">Choose Ligth or Dark Sidebar Color.</p>
@@ -731,7 +730,7 @@ const RightSidebar = () => {
                                                         id="sidebar-color-light"
                                                         value={leftSidebarTypes.LIGHT}
                                                         checked={leftSidebarType === leftSidebarTypes.LIGHT}
-                                                        onChange={e => {
+                                                        onChange={(e) => {
                                                             if (e.target.checked) {
                                                                 dispatch(changeSidebarTheme(e.target.value));
                                                             }
@@ -767,7 +766,7 @@ const RightSidebar = () => {
                                                         id="sidebar-color-dark"
                                                         value={leftSidebarTypes.DARK}
                                                         checked={leftSidebarType === leftSidebarTypes.DARK}
-                                                        onChange={e => {
+                                                        onChange={(e) => {
                                                             if (e.target.checked) {
                                                                 dispatch(changeSidebarTheme(e.target.value));
                                                             }
@@ -797,12 +796,9 @@ const RightSidebar = () => {
                                         </div>
                                     </div>
                                 )}
-
                             </div>
                         </SimpleBar>
-
                     </OffcanvasBody>
-                    
                 </Offcanvas>
             </div>
         </React.Fragment>
