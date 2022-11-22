@@ -5,13 +5,16 @@ const config: ConnectionOptions = {
     port: 3306,
     username: 'root',
     password: '1234567',
-    database: 'quiz',
+    database: 'quizApp',
     entities: [__dirname + '/**/*.entity{.ts,.js}'],
-    synchronize: false,
+    synchronize: true,
     migrationsRun: true,
     logging: true,
     logger: 'file',
-    migrations: [__dirname + '/database/migrations/**/*{.ts,.js}'],
+    migrations: [
+        "src/migrations/*.ts",
+        "dist/migrations/*{.ts,.js}"
+    ],
     cli: {
         migrationsDir: 'src/migrations',
     },
