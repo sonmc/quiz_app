@@ -8,7 +8,7 @@ import Sidebar from "./Sidebar";
 import Footer from "./Footer";
 
 //import actions
-import { changeLayout, changeSidebarTheme, changeLayoutMode, changeLayoutWidth, changeLayoutPosition, changeTopbarTheme, changeLeftsidebarSizeType, changeLeftsidebarViewType } from "../store/actions";
+import { changeLayout, changeSidebarTheme, changeLayoutMode, changeLayoutWidth, changeLayoutPosition, changeTopbarTheme } from "../store/actions";
 
 //redux
 import { useSelector, useDispatch } from "react-redux";
@@ -16,24 +16,20 @@ import { useSelector, useDispatch } from "react-redux";
 const Layout = (props) => {
   const [headerClass, setHeaderClass] = useState("");
   const dispatch = useDispatch();
-  const { layoutType, leftSidebarType, layoutModeType, layoutWidthType, layoutPositionType, topbarThemeType, leftsidbarSizeType, leftSidebarViewType } = useSelector((state) => ({
+  const { layoutType, leftSidebarType, layoutModeType, layoutWidthType, layoutPositionType, topbarThemeType, leftSidebarViewType } = useSelector((state) => ({
     layoutType: state.Layout.layoutType,
     leftSidebarType: state.Layout.leftSidebarType,
     layoutModeType: state.Layout.layoutModeType,
     layoutWidthType: state.Layout.layoutWidthType,
     layoutPositionType: state.Layout.layoutPositionType,
     topbarThemeType: state.Layout.topbarThemeType,
-    leftsidbarSizeType: state.Layout.leftsidbarSizeType,
-    leftSidebarViewType: state.Layout.leftSidebarViewType,
   }));
 
   /*
     layout settings
     */
   useEffect(() => {
-    if (layoutType || leftSidebarType || layoutModeType || layoutWidthType || layoutPositionType || topbarThemeType || leftsidbarSizeType || leftSidebarViewType) {
-      dispatch(changeLeftsidebarViewType(leftSidebarViewType));
-      dispatch(changeLeftsidebarSizeType(leftsidbarSizeType));
+    if (layoutType || leftSidebarType || layoutModeType || layoutWidthType || layoutPositionType || topbarThemeType || leftSidebarViewType) {
       dispatch(changeSidebarTheme(leftSidebarType));
       dispatch(changeLayoutMode(layoutModeType));
       dispatch(changeLayoutWidth(layoutWidthType));
@@ -41,7 +37,7 @@ const Layout = (props) => {
       dispatch(changeTopbarTheme(topbarThemeType));
       dispatch(changeLayout(layoutType));
     }
-  }, [layoutType, leftSidebarType, layoutModeType, layoutWidthType, layoutPositionType, topbarThemeType, leftsidbarSizeType, leftSidebarViewType, dispatch]);
+  }, [layoutType, leftSidebarType, layoutModeType, layoutWidthType, layoutPositionType, topbarThemeType, leftSidebarViewType, dispatch]);
   /*
     call dark/light mode
     */
