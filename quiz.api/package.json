@@ -21,8 +21,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js --config ormconfig.ts",
     "typeorm:migrate": "npm run typeorm migration:create -- -n",
-    "typeorm:run": "npm run typeorm migration:run",
-    "migrate:up": "ts-node ./node_modules/typeorm/cli.js migration:run"
+    "typeorm:run": "npm run typeorm migration:run"
   },
   "dependencies": {
     "@nestjs-modules/mailer": "^1.8.1",

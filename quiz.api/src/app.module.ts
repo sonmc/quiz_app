@@ -1,7 +1,6 @@
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { join } from 'path';
 import { UserModule } from './user/user.module';
@@ -17,29 +16,38 @@ import { QuestionExamModule } from './question-exam/question-exam.module';
 import { ConfigurationModule } from './configuration/configuration.module';
 
 @Module({
-  imports:  [  
-  ConfigurationModule,
-  TypeOrmModule.forRootAsync({
-    inject: [ConfigService],
-    useFactory: (config: ConfigService) => {
-      return {
-        type: 'mysql',
-        host: config.get<string>('database.host'),
-        port: config.get<number>('database.port'),
-        username: config.get<string>('database.userName'),
-        password: config.get<string>('database.password'),
-        database: config.get<string>('database.name'),
-        entities: [join(__dirname, '**', '*.entity.{ts,js}')],
-        synchronize: true,
-        logging: ['query', 'error'],
-      };
-    },
-  }),
-    UserModule, AuthModule,
-    UserModule, QuestionModule,
-    CategoryModule, AnswerModule, ExamModule, ClassModule, StudentModule, StudentClassModule, StudentAnswerModule, QuestionExamModule,
+  imports: [
+    ConfigurationModule,
+    TypeOrmModule.forRootAsync({
+      inject: [ConfigService],
+      useFactory: (config: ConfigService) => {
+        return {
+          type: 'mysql',
+          host: config.get<string>('database.host'),
+          port: config.get<number>('database.port'),
+          username: config.get<string>('database.userName'),
+          password: config.get<string>('database.password'),
+          database: config.get<string>('database.name'),
+          entities: [join(__dirname, '**', '*.entity.{ts,js}')],
+          synchronize: true,
+          logging: ['query', 'error'],
+        };
+      },
+    }),
+    UserModule,
+    AuthModule,
+    UserModule,
+    QuestionModule,
+    CategoryModule,
+    AnswerModule,
+    ExamModule,
+    ClassModule,
+    StudentModule,
+    StudentClassModule,
+    StudentAnswerModule,
+    QuestionExamModule,
   ],
   controllers: [],
-  providers: [AppService],
+  providers: [],
 })
-export class AppModule { }
+export class AppModule {}
