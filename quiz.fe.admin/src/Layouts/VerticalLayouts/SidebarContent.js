@@ -24,9 +24,7 @@ const SidebarContent = (props) => {
         activateParentDropdown(matchingMenuItem);
       }
     };
-    if (props.layoutType === "vertical") {
-      initMenu();
-    }
+    initMenu();
   }, [props.location.pathname, props.layoutType]);
 
   function activateParentDropdown(item) {
