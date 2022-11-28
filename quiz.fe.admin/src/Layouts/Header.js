@@ -9,11 +9,9 @@ import logoLight from "../assets/images/logo-light.png";
 
 //import Components
 import FullScreenDropdown from "../Components/Common/FullScreenDropdown";
-import NotificationDropdown from "../Components/Common/NotificationDropdown";
 import ProfileDropdown from "../Components/Common/ProfileDropdown";
-import LightDark from "../Components/Common/LightDark";
 
-const Header = ({ onChangeLayoutMode, layoutModeType, headerClass }) => {
+const Header = ({ headerClass }) => {
   const [search, setSearch] = useState(false);
   const toogleSearch = () => {
     setSearch(!search);
@@ -107,8 +105,6 @@ const Header = ({ onChangeLayoutMode, layoutModeType, headerClass }) => {
               </Dropdown>
 
               <FullScreenDropdown />
-              <LightDark layoutMode={layoutModeType} onChangeLayoutMode={onChangeLayoutMode} />
-              <NotificationDropdown />
               <ProfileDropdown />
             </div>
           </div>
